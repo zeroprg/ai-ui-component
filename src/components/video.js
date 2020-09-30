@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-import Button from  'react-bootstrap/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
-class Video extends Component {
 
-    render(){
-        const {url,cam} = this.props.url;
-        return(<span>              
+
+const Video = (props) => {
+    const useStyles = makeStyles({
+        root: {
+            '-webkit-user-select': 'none',
+             display: 'block',
+             width: '100%',
+             'min-width': '300px',
+             height: 'auto',
+        },
+      });
+      const classes = useStyles(); 
+      const {url,cam} = props.url;        
+
+    return(<span>              
             <b>{url}: <button id={'drwZone'+ cam} onClick = {'refresh(' +cam +')'}>Show zones</button>
             </b>
             <br/> 
-            <img id={'stream'+cam}  style={{webkitUserSelect: 'none', display:'block', width: '100%',height:'auto'}} src={url} alt="Video Streamer"/>
+            <img id={'stream'+cam}  className={classes.root} src={url} alt="Video Streamer"/>
             <div id={'canvas_div'+ cam} style={{float:'left', marginLeft: '20px', display:'none'}} >
                     <canvas id={'jPolygon'+ cam} width="500" height="400" style={{cursor: 'crosshair'}} data-imgsrc={url} onMouseDown="point_it(event,{{cam}})" onContextMenu="return false;">
                         Your browser does not support the HTML5 canvas tag.
@@ -30,7 +41,6 @@ class Video extends Component {
                     </div>
             </div>
          </span>
-        );
-    }
+  );
 }
 export default Video

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import SelectObj from './obj_select';
+
 
 import ObjectOfInterestPlot from './obj_plot'
 import ObjectOfInterest from './objects_of_interest'
@@ -87,13 +87,13 @@ render() {
                 </div> {/* className row */}
 
             <div className="row">
-              <div className="col-sm-6">
+              <div className="col-sm-12">
                 <Video url = {url}/> 
               </div>  
-              <div className="col-sm-6">                           
+              <div className="col-sm-12">                           
                 <Tabs  defaultActiveKey="founded_objects" id="uncontrolled-tab">
                     <Tab eventKey="founded_objects" title="Founded Objects" className="tabcontent">
-                    <SelectObj/>
+                    
                     {/*<ObjectOfInterest object_of_interest='' cam= {url.cam} />  */}
                     <div id={'Objectsfilter'+url.cam} className="tabcontent" style={{display:'block'}}/>                     
                     {/*

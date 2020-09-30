@@ -1098,4 +1098,6 @@ a.btn {
 
 .row {
     display: inline-flex;
-}
+    padding-left: 10px;
+  }
+  
