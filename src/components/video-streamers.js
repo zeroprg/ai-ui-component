@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-
+import SelectObj from './obj_select';
 
 import ObjectOfInterestPlot from './obj_plot'
 import ObjectOfInterest from './objects_of_interest'
@@ -87,34 +87,17 @@ render() {
                 </div> {/* className row */}
 
             <div className="row">
-              <div className="col-sm-12">
+              <div className="col-sm-6">
                 <Video url = {url}/> 
               </div>  
-              <div className="col-sm-12">                           
+              <div className="col-sm-6">                           
                 <Tabs  defaultActiveKey="founded_objects" id="uncontrolled-tab">
                     <Tab eventKey="founded_objects" title="Founded Objects" className="tabcontent">
-                    
-                    {/*<ObjectOfInterest object_of_interest='' cam= {url.cam} />  */}
-                    <div id={'Objectsfilter'+url.cam} className="tabcontent" style={{display:'block'}}/>                     
-                    {/*
-                        <!-- Header -->
-                        <nav>
-                        <ul className="pagination header">
-                            <li><a id = "first{{cam}}" rel="first" href="javascript:void(0)">First</a></li>
-                            <li><a id = "next{{cam}}"  rel="next"  href="javascript:void(0)">Next</a></li>
-                            <li><a id = "prev{{cam}}"  rel="prev"  href="javascript:void(0)">Previous</a></li>
-                        </ul>
-                        </nav>
-                        <div className="header" id="myHeader">
-                            <button className="btn"  onClick="showmore(1,{{cam}});" title="Back"><<</button>
-                            <button className="btn"  onClick="showmore(1,{{cam}},0);">Now</button>
-                            <button id="forward{{cam}}" title="Forward" className="btn" onClick="showmore(-1,{{cam}});" style="visibility:hidden">>></button>
-                        </div>                    
-                    */}
-                    {/* Photo Grid */}
-                    <div id={'cam' + url.cam } className="images_row"></div> 
+                        
+                     <ObjectOfInterest object_of_interest='person' cam= {url.cam} />
+  
                     </Tab>
-                   <Tab eventKey="events" title="Events Notify" className="tabcontent">
+  {/*                 <Tab eventKey="events" title="Events Notify" className="tabcontent">
                     <h3>Events notifyer</h3>
                         <p>Specify Events which will triger eMail or SMS/Voice notify.</p>
                         <select name="objects">
@@ -142,7 +125,8 @@ render() {
                         </select> 
                         :
                         <input type="text" placeholder="" min="0"  max="100" />
-                    </Tab>       
+                    </Tab> 
+            */}       
                 </Tabs>
                 </div>  {/*<div className="col-sm-6">*/}
              </div> {/* className row */}

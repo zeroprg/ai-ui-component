@@ -1090,14 +1090,14 @@ a.btn {
     position: relative;
 }
 
-
-
-.col-sm-6 {
-    width: 50%;
-}
-
 .row {
     display: inline-flex;
     padding-left: 10px;
   }
   
+@media only screen and (max-width:820px){
+    .col-sm-6{
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+}
