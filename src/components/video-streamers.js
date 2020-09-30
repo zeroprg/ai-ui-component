@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
+import SelectObj from './obj_select';
 
+import ObjectOfInterestPlot from './obj_plot'
 import ObjectOfInterest from './objects_of_interest'
-
 import Video from './video';
 
 class VideoStreamers extends Component {
@@ -53,6 +54,8 @@ render() {
     const { param } = this.props;
     const isOnlyVideos = param.videoalignment === 'video';
 
+
+
     if (error) {
         return <p>{error.message}</p>;
     }
@@ -79,19 +82,8 @@ render() {
             <section  key={'section'+url.cam} style={{display: 'block'}}>
                 <div className="row">
                     <div className="col-sm-12">
-                        <div className="header">
-                            <select className="mdb-select md-form colorful-select dropdown-danger" name="Objects log"  onChange="moreparams({{cam}}, this.value)">
-                                <option value="0-1">Show statistic for last hour</option>
-                                <option value="0-3"> for last 3 hour</option>
-                                <option value="0-6"> for last 6 hours</option>
-                                <option value="0-12"> for last 12 hours</option>
-                                <option value="12-24"> between 12h and 24h back (yersterday)</option>
-                                <option value="24-48"> between 24h and 48h back (day before yersterday)</option>
-                                <option value="48-100">all records from 48h and 100h back</option>	     
-                            </select>                                    
-                            <div id= {'lastDiv' +url.cam } className="col-sm-12" style={{height:'290px', width: '100%'}}/>
-                        </div> {/* className header */}         
-                    </div> {/* className col-sm-12 */}
+                    <ObjectOfInterestPlot  cam={url.cam}/>
+                    </div> 
                 </div> {/* className row */}
 
             <div className="row">
@@ -101,7 +93,8 @@ render() {
               <div className="col-sm-6">                           
                 <Tabs  defaultActiveKey="founded_objects" id="uncontrolled-tab">
                     <Tab eventKey="founded_objects" title="Founded Objects" className="tabcontent">
-                    <ObjectOfInterest/>   
+                    <SelectObj/>
+                    {/*<ObjectOfInterest object_of_interest='' cam= {url.cam} />  */}
                     <div id={'Objectsfilter'+url.cam} className="tabcontent" style={{display:'block'}}/>                     
                     {/*
                         <!-- Header -->

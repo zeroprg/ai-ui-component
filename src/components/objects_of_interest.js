@@ -12,7 +12,6 @@ class ObjectOfInterest extends Component {
             event.target.classList.removeClass('popup');
             event.target.classList.addClass('img_thumb');
         }
-
     }
 
 
@@ -45,6 +44,7 @@ class ObjectOfInterest extends Component {
 
     render(){
         const { data, isLoading, error } = this.state;
+
         if (error) {
             return <p>{error.message}</p>;
         }
@@ -56,12 +56,12 @@ class ObjectOfInterest extends Component {
       <span>        
         <nav>
         <ul className="pagination header">
-            <li><a id = "first{{cam}}" rel="first" href={this.showmore(this.props.object_of_interest,1,this.props.url.cam,0)}>First</a></li>
-            <li><a id = "next{{cam}}"  rel="next"  href={this.showmore(this.props.object_of_interest,1,this.props.url.cam)}>Next</a></li>
-            <li><a id = "prev{{cam}}"  rel="prev"  href={this.showmore(this.props.object_of_interest,1,this.props.url.cam)}>Previous</a></li>
+            <li><a id = {'first'+ this.props.cam } rel="first" href={this.showmore(this.props.object_of_interest,1,this.props.cam,0)}>First</a></li>
+            <li><a id = {'next'+ this.props.cam }  rel="next"  href={this.showmore(this.props.object_of_interest,1,this.props.cam)}>Next</a></li>
+            <li><a id = {'prev'+ this.props.cam }  rel="prev"  href={this.showmore(this.props.object_of_interest,1,this.props.cam)}>Previous</a></li>
         </ul>
         </nav>       
-        <div id={'Objectsfilter'+ this.props.url.cam } className="tabcontent" style={{display:'block'}}>
+        <div id={'Objectsfilter'+ this.props.cam } className="tabcontent" style={{display:'block'}}>
            {data.map((data,indx) =>
             <img key={indx} className={this.state.imgClassName} src={data.frame}  alt={data.currentime} onClick={this.popup_image.bind(this)} />
            )} 
