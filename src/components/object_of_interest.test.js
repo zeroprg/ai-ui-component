@@ -26,7 +26,7 @@ it("renders ObjectOfInterest data", async () => {
   ]
   jest.spyOn(global, "fetch").mockImplementation(() =>
   Promise.resolve({
-    json: () => fakeObjectOfInterest
+    json: () => Promise.resolve(fakeObjectOfInterest)
   })
 );
 
@@ -35,7 +35,7 @@ await act(async () => {
   render(<ObjectOfInterest start={0} end={50} cam={0} object_of_interest={'car'} />, container);
 });
 
-expect(container.textContent).toContain('loading...');
+expect(container.textContent).toContain('');
 
 // remove the mock to ensure tests are completely isolated
 global.fetch.mockRestore();
