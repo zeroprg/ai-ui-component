@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 });
 
 function valuetext(value) {
-  return `${value} hours`;
+  return value + ' hours';
 }
 
 export default function RangeSlider() {

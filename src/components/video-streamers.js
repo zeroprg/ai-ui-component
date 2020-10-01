@@ -5,12 +5,14 @@ import SelectObj from './obj_select';
 import ObjectOfInterestPlot from './obj_plot'
 import ObjectOfInterest from './objects_of_interest'
 import Video from './video';
+import VideoStreamer from './video-streamer';
 
 class VideoStreamers extends Component {
-    
+    // shared between childs functions
     updateparams = (param) => {
         this.setState({param:param});
     }
+
 
     constructor(props) {
         super();
@@ -29,7 +31,7 @@ class VideoStreamers extends Component {
 }
 
 
-    loadData() {
+    loadURLs() {
         const API = ""
         const DEFAULT_QUERY ="urls?list=true"
         this.setState({ isLoading: true });
@@ -68,7 +70,7 @@ render() {
         <div className="row">
             {urls.map( url => 
             <div key={'cam'+url.cam} className="col-sm-4">
-                <Video  url = {url}/>
+                <Video camera = {url}/>
             </div> 
             )}
         </div>
@@ -78,59 +80,8 @@ render() {
     return (            
        
         <span>
-            {urls.map( url =>               
-            <section  key={'section'+url.cam} style={{display: 'block'}}>
-                <div className="row">
-                    <div className="col-sm-12">
-                    <ObjectOfInterestPlot  cam={url.cam}/>
-                    </div> 
-                </div> {/* className row */}
-
-            <div className="row">
-              <div className="col-sm-6">
-                <Video url = {url}/> 
-              </div>  
-              <div className="col-sm-6">                           
-                <Tabs  defaultActiveKey="founded_objects" id="uncontrolled-tab">
-                    <Tab eventKey="founded_objects" title="Founded Objects" className="tabcontent">
-                        
-                     <ObjectOfInterest object_of_interest='person' cam= {url.cam} />
-  
-                    </Tab>
-  {/*                 <Tab eventKey="events" title="Events Notify" className="tabcontent">
-                    <h3>Events notifyer</h3>
-                        <p>Specify Events which will triger eMail or SMS/Voice notify.</p>
-                        <select name="objects">
-                            <option value="person">person</option>
-                            <option value="car">car</option>
-                            <option value="dog">dog</option>
-                            <option value="cat">cat</option>
-                        </select> and 
-                        <select name="quantity">
-                            <option value="quantity">quantity</option>
-                            <option value="time">time(sec.)</option>
-                        </select> 
-                        <select name="&gt;>">
-                            <option value={'&gt;'}>&gt;</option>
-                            <option value={'&lt;'}>&lt;</option>
-                            <option value="=">=</option>
-                        </select>              
-                        <input type="number" id="quantity" name="quantity" placeholder="0" min="0" max="100" />
-                        <br/>
-                        Notify me by 
-                        <select name="eMail;>">
-                            <option value="email;">email</option>
-                            <option value="sms">SMS</option>
-                            <option value="voice">voice</option>
-                        </select> 
-                        :
-                        <input type="text" placeholder="" min="0"  max="100" />
-                    </Tab> 
-            */}       
-                </Tabs>
-                </div>  {/*<div className="col-sm-6">*/}
-             </div> {/* className row */}
-           </section>                       
+            {urls.map( camera =>               
+            <VideoStreamer camera={camera} object_of_interest={this.object_of_interest}/>
         )}
         </span>
     );
