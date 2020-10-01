@@ -1,7 +1,7 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-import ObjectOfInterest from "./objects_of_interest";
+import ObjectOfInterest from "../objects_of_interest";
 //import { fakeObjectOfInterest } from "./test-data/fakeObjectOfInterest";
 
 

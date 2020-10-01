@@ -41,11 +41,11 @@ class App extends Component {
             </div>
         </section>
     </header>
-    <section id="videos">
-     <div className="row">
+    
+
        <VideoStreamers param={this.state.param}  addURL={this.addNewURL.bind(this,this.state.url)} />
-    </div> 
-    </section>
+
+    
  
         <div class="feature-bg">
             <div class="row">

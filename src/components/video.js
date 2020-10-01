@@ -9,8 +9,10 @@ const Video = (props) => {
             '-webkit-user-select': 'none',
              display: 'block',
              width: '100%',
-             'min-width': '300px',
-             height: 'auto',
+             'min-width': '400px',
+             height: 'auto',             
+             'padding-top': '20px',
+
         },
       });
       const classes = useStyles(); 

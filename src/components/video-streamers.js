@@ -81,7 +81,7 @@ render() {
        
         <span>
             {urls.map( camera =>               
-            <VideoStreamer camera={camera} object_of_interest={this.object_of_interest}/>
+            <VideoStreamer key={camera.url} camera={camera} object_of_interest={this.object_of_interest}/>
         )}
         </span>
     );
