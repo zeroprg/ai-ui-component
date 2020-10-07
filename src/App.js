@@ -6,11 +6,18 @@ import InputURL from './components/input-forms'
 import VideoStreamers from './components/video-streamers'
 //import Carousel from 'react-bootstrap/Carousel'
 
+
 class App extends Component {
-  state = { url: {cam:0, url:''}, param: {videoalignment: 'video'} }
+  state = { urls: [{cam:0, url:''}], param: {videoalignment: 'video'} }
 
   addNewURL(url){
     this.setState({url:url});
+  }
+
+  updateurls(urls){
+     //convert from one format [[1,'url1'], [1,'url2']] to another [{cam:0, url:url}, {{cam:1, url:ur2}}] 
+     const urls_ = urls.map( data => { var l = {cam:data[0], url:data[1] }; return l; }); 
+     this.setState({urls:urls_});
   }
 
   updateparams = (param) => {
@@ -34,7 +41,7 @@ class App extends Component {
                         <h1 className="animated fadeInDown">AI processed video streams from public cameras.</h1>
                         <h3> This is free smart cloud storage  for cameras video streams works on ODROID ARM based computers   (100% python , no php  for more information check 
                         <a href="//aicameras.ca" target="_blank" rel="noopener noreferrer"> http://aicameras.ca</a> ), bellow public available video-streams: </h3>
-                        <URLlist key={this.state.url}/>
+                        <URLlist updateurls={this.updateurls.bind(this)} key={this.state.url}/>
                         <InputURL updateparams={this.updateparams.bind(this)} addURL={this.addNewURL.bind(this)}/>          
                      </div>
                 </div>
@@ -43,7 +50,7 @@ class App extends Component {
     </header>
     
 
-       <VideoStreamers param={this.state.param}  addURL={this.addNewURL.bind(this,this.state.url)} />
+       <VideoStreamers param={this.state.param} urls={this.state.urls}  addURL={this.addNewURL.bind(this,this.state.url)} />
 
     
  

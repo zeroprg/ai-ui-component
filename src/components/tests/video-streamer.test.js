@@ -2,6 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import VideoStreamer from "./video-streamer";
+import  {global} from "../../config";
 //import { fakeObjectOfInterest } from "./test-data/fakeObjectOfInterest";
 
 

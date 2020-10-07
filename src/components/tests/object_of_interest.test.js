@@ -2,6 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import ObjectOfInterest from "../objects_of_interest";
+import {global} from "../../config";
 //import { fakeObjectOfInterest } from "./test-data/fakeObjectOfInterest";
 
 
@@ -22,9 +23,8 @@ afterEach(() => {
 });
 
 it("renders ObjectOfInterest data", async () => {
-  const fakeObjectOfInterest = [    { hashcode: 'ABCF23422323' , currenttime: 1601476686.8732808, frame: 'data:image/jpeg;base64'},
-                                    { hashcode: 'ABCF23422324' , currenttime: 1601476686, frame: 'data:image/jpeg;base64'}   
-  ]
+  const fakeObjectOfInterest = [ { hashcode: 'ABCF23422323' , currenttime: 1601476686.8732808, frame: 'data:image/jpeg;base64'},
+                                 { hashcode: 'ABCF23422324' , currenttime: 1601476686, frame: 'data:image/jpeg;base64'}]
   jest.spyOn(global, "fetch").mockImplementation(() =>
   Promise.resolve({
     json: () => Promise.resolve(fakeObjectOfInterest)

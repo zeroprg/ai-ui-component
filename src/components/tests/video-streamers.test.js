@@ -2,6 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import VideoStreamers from "../video-streamers";
+import  {global} from "../../config";
 //import { fakeObjectOfInterest } from "./test-data/fakeObjectOfInterest";
 
 
@@ -27,12 +28,14 @@ it("renders VideoStreamers data", async () => {
         objectOfInterests: ['car','person','cat', 'dog', 'track', 'motobike']
     }
 
- 
-  jest.spyOn(global, "fetch").mockImplementation(() =>
+ /* fix it
+  jest.spyOn(VideoStreamers.prototype, "fetch").mockImplementation(() =>
   Promise.resolve({
     json: () => Promise.resolve(fakeVideoStreamers)
   })
+
 );
+  */
 
 // Use the asynchronous version of act to apply resolved promises
 await act(async () => {

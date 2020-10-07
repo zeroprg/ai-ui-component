@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
-import SelectObj from './obj_select';
 
-import ObjectOfInterestPlot from './obj_plot'
-import ObjectOfInterest from './objects_of_interest'
 import Video from './video';
 import VideoStreamer from './video-streamer';
 
@@ -22,21 +18,27 @@ class VideoStreamers extends Component {
 
 
     componentWillMount() {
-        // initial state
-    this.setState({
-        urls:[{cam:0,url:'http://203.77.210.41:2000/mjpg/video.mjpg'}, {cam:1,url:'http://203.77.210.41:2000/mjpg/video.mjpg'},{cam:2,url:'http://203.77.210.41:2000/mjpg/video.mjpg'}, {cam:3,url:'http://203.77.210.41:2000/mjpg/video.mjpg'}],
-        objectOfInterests: ['car','person','cat', 'dog', 'track', 'motobike'],
-        isLoading : false 
-    })
-}
+        this.object_of_interest = ['car','person','cat', 'dog', 'track', 'motobike'];
 
+            // initial state
+        this.setState({
+            isLoading : false,
+            //object_of_interest: ['car','person','cat', 'dog', 'track', 'motobike']
+
+        })
+        this.timerange = {start: 0, end: 46456};
+    }
+
+    componentDidMount() {
+        // initial state
+       // this.loadURLs()
+    }    
 
     loadURLs() {
-        const API = ""
-        const DEFAULT_QUERY ="urls?list=true"
+        const DEFAULT_QUERY =  global.config.API + "urls?list=true";
         this.setState({ isLoading: true });
 
-        fetch(API + DEFAULT_QUERY)
+        fetch( DEFAULT_QUERY )
             .then(response => {
                 console.log(" response:" + response)
                 if (response.ok) {
@@ -47,12 +49,13 @@ class VideoStreamers extends Component {
                     throw new Error('Something went wrong ...');
                 }
             })
-            .then(data => this.setState({ urls: data.urls, objectOfInterests: data.objectOfInterests, isLoading: false }))
+            .then(data => this.setState({ urls: data.urls, object_of_interest: data.object_of_interest, isLoading: false }))
             .catch(error => this.setState({ error, isLoading: false }));
     }
 
 render() {
-    const { urls,  isLoading, error } = this.state;
+    const { urls } = this.props;
+    const {  isLoading, error } = this.state;
     const { param } = this.props;
     const isOnlyVideos = param.videoalignment === 'video';
 
@@ -70,7 +73,7 @@ render() {
         <div className="row">
             {urls.map( url => 
             <div key={'cam'+url.cam} className="col-sm-4">
-                <Video camera = {url}/>
+                <Video camera = {url} />
             </div> 
             )}
         </div>
@@ -81,7 +84,7 @@ render() {
        
         <span>
             {urls.map( camera =>               
-            <VideoStreamer key={camera.url} camera={camera} object_of_interest={this.object_of_interest}/>
+            <VideoStreamer key={camera.url} camera={camera} timerange = {this.timerange}  object_of_interest={this.object_of_interest}/>
         )}
         </span>
     );

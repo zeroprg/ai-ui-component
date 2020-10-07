@@ -13,18 +13,20 @@ function valuetext(value) {
   return value + ' hours';
 }
 
-export default function RangeSlider() {
+const RangeSlider = ({onParamsChanged, timerange}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState([1, 2]);
+  const [value, setValue] = React.useState([timerange.start, timerange.end]);
 
   const handleChange = (event, newValue) => {
+    const timerange = {start: newValue[0], end: newValue[1]} 
+    onParamsChanged(timerange);
     setValue(newValue);
   };
 
   return (
     <div className={classes.root}>
       <Typography id="range-slider" gutterBottom>
-        Time range (hours back)
+        Time range (between {value[0]} and {value[1]} hours back)
       </Typography>
       <Slider
         value={value}
@@ -36,3 +38,4 @@ export default function RangeSlider() {
     </div>
   );
 }
+export default RangeSlider

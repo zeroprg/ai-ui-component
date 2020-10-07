@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 function addURL(url){
     this.setState(url);
   }
@@ -10,7 +9,14 @@ class URLlist extends Component {
 buttonClickHide(arg1, arg2) {
     document.getElementById("section"+arg2).style.display ='none';
 }
+ constructor(){
+     super();
+     this.state = {data : []};
+ }
 
+ updateurls( urls ) {
+    this.props.updateurls(urls);
+ }
 /*
 moreparams(camera , value){
     hours = value.split("-");
@@ -33,33 +39,16 @@ buttonClickShow(data, cam) {
     let elem = document.getElementById("section"+cam);
     elem.style.display ='block'
     this.moreparams(cam, "0-1");
-    //this.showmore(1,cam,0);
     elem.scrollIntoView();
-
-/*
-    fetch(data)
-         .then(response => {
-            console.log(" response:" + response)
-            if (response.ok) {
-                console.log(" response:" + JSON.stringify(response, null, 2) ); 
-                this.loadData();
-                return response.json();
-            } else {
-                console.log(" error:")
-                throw new Error('Something went wrong ...');
-            }
-        })
-*/
 }
 
-loadData() {
-    const API = ""
-    const DEFAULT_QUERY ="urls?list=true"
-    const URL = API + "urls"
+loadData() {  
+    const DEFAULT_QUERY = global.config.API + "urls?list=true"
+    const URL = global.config.API + "urls"
     const deleteURL = URL + "?delete="
     this.setState({ isLoading: true });
    
-    fetch(API + DEFAULT_QUERY)
+    fetch(DEFAULT_QUERY)
         .then(response => {
             console.log(" response:" + response)
             if (response.ok) {
@@ -70,11 +59,15 @@ loadData() {
                 throw new Error('Something went wrong ...');
             }
         })
-        .then(data => this.setState({ data: data, url: deleteURL, isLoading: false }))
+        .then(data => {
+             this.setState({ data: data, url: deleteURL, isLoading: false })
+             this.updateurls(data);
+             return data;
+            })
         .catch(error => this.setState({ error, isLoading: false }));
 }
 
-
+/*
 componentWillMount() {
         // initial state
     this.setState({
@@ -83,10 +76,10 @@ componentWillMount() {
        // error: {message: 'URL is empty' }
     })
 }    
-
+*/
 componentDidMount() {
     // initial state
-    //this.loadData()
+    this.loadData()
 }    
 
 

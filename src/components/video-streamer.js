@@ -11,38 +11,19 @@ class VideoStreamer extends Component {
     componentWillMount() {
         // initial state
     this.setState({
-        data:[],
-        objectOfInterests: ['car','person','cat', 'dog', 'track', 'motobike'],
-        isLoading : false 
+        isLoading : false,
+        timerange: {start: 0, end: 5} 
         })
     }
-    // shared between childs functions
-    showmore = (object_of_interest,  cam, start, end) => {
-        //console.log("start:" + start);
-        const  img_paginator = 50;
-        if( start  <  0  ) { this.setState({end: 0 }); this.setState({ start: img_paginator }); }
-        else { 
-            const _start = start + img_paginator;
-            this.setState({start: _start}); 
-            const _end = end + img_paginator;
-            this.setState({end: _end});
-         }           
-        
-        const DEFAULT_QUERY =  "/moreimgs?start=" + start + "&cam=" + cam + "&end="+end + "&object_of_interest="+object_of_interest; 
 
-        fetch(DEFAULT_QUERY)
-            .then(response => {
-                // make sure to check for errors
-                return response.json();
-            })
-            .then(json => { 
-                this.setState({data: json});
-            });
+    onParamsChanged = (timerange, object_of_interest)=>{
+        if(timerange)          this.setState( {timerange: timerange} );
+        if(object_of_interest) this.setState( {object_of_interest: object_of_interest});
     }
 
     render() {
         //const { error } = this.state;
-        const { camera, object_of_interest } = this.props;
+        const { camera } = this.props;
 /*
         if (error) {
             return <p>{error.message}</p>;
@@ -53,7 +34,10 @@ class VideoStreamer extends Component {
                 <section  key={'section'+camera.cam} style={{display: 'block'}}>
                     <div className="row">
                         <div className="col-sm-12">
-                           <ObjectOfInterestPlot  cam={camera.cam}/>
+                          <ObjectOfInterestPlot cam={camera.cam}
+                                                timerange={this.state.timerange} 
+                                                onParamsChanged={this.onParamsChanged.bind(this)}
+                                                object_of_interest={this.props.object_of_interest}/>
                         </div> 
                     </div> {/* className row */}
 
@@ -64,9 +48,10 @@ class VideoStreamer extends Component {
                 <div className="col-sm-6">                           
                     <Tabs  defaultActiveKey="founded_objects" id="uncontrolled-tab">
                         <Tab eventKey="founded_objects" title="Founded Objects" className="tabcontent">
-                            
-                            <ObjectOfInterest object_of_interest={object_of_interest} data={this.state.data} cam={camera.cam} />
-    
+                            <ObjectOfInterest object_of_interest={this.state.object_of_interest}
+                                timerange={this.state.timerange}
+                                cam={camera.cam}
+                            />    
                         </Tab>
     {/*                 <Tab eventKey="events" title="Events Notify" className="tabcontent">
                         <h3>Events notifyer</h3>

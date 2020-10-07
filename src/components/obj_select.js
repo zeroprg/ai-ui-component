@@ -35,18 +35,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
 
 function getStyles(name, objectName, theme) {
   return {
@@ -57,37 +45,40 @@ function getStyles(name, objectName, theme) {
   };
 }
 
-export default function MultipleSelect() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [objectName, setObjectName] = React.useState([]);
-
-  const handleChange = (event) => {
-    setObjectName(event.target.value);
-  };
-
-
-  return (
-    <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-name-label">Filter by interest</InputLabel>
-        <Select
-          labelId="demo-mutiple-name-label"
-          id="demo-mutiple-name"
-          multiple
-          value={objectName}
-          onChange={handleChange}
-          input={<Input />}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem key={name} value={name} style={getStyles(name, objectName, theme)}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+  const SelectObj = (props) => {
+    const classes = useStyles();
+    const theme = useTheme();
+    const [objectName, setObjectName] = React.useState([]);
     
-    </div>
-  );
+
+    const handleChange = (event) => {
+      setObjectName(event.target.value);
+      props.onParamsChanged(undefined, objectName)
+    };
+
+
+    return (
+      <div>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-mutiple-name-label">Filter by interest</InputLabel>
+          <Select
+            labelId="demo-mutiple-name-label"
+            id="demo-mutiple-name"
+            multiple
+            value={objectName}
+            onChange={handleChange}
+            input={<Input />}
+            MenuProps={MenuProps}
+          >
+            {props.object_of_interest.map((name) => (
+              <MenuItem key={name} value={name} style={getStyles(name, objectName, theme)}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      
+      </div>
+    );
 }
+export default SelectObj
