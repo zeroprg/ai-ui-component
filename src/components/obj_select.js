@@ -53,7 +53,7 @@ function getStyles(name, objectName, theme) {
 
     const handleChange = (event) => {
       setObjectName(event.target.value);
-      props.onParamsChanged(undefined, objectName)
+      props.onParamsChanged(undefined, event.target.value);
     };
 
 

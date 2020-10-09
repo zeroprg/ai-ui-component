@@ -2,32 +2,38 @@ import React, { useState, useEffect } from 'react';
 
 const ObjectOfInterest = (props) => {
     
-    const PAGINATOR = 20
+    const PAGINATOR = 100
 
     const popup_image = (event) =>{
         if(event.target.classList.contains('img_thumb')){
-            event.target.classList.remove('img_thumb', '');
-            event.target.classList.add('popup');
+            event.target.classList.replace('img_thumb', 'popup');   
         } else if(event.target.classList.contains('popup')){
-            event.target.classList.remove('popup', '');
-            event.target.classList.add('img_thumb');
+            event.target.classList.remove('popup', 'img_thumb');    
         }
     }
 
-    
+    //const [selected_obj_of_interest, setObjectOfInterest]  = useState([props.object_of_interest[0]])
+ 
     const [data, setData]   = useState(null);
     const [counter, setCounter]   = useState(PAGINATOR);
-    const {timerange} = props;
-    const {object_of_interest} = props;
+
     const {cam} = props;
 
-    async function fetchImageData() {
-        const DEFAULT_QUERY =  global.config.API + "/moreimgs?start=" + timerange.start + "&cam=" + cam + "&end=" + timerange.end + "&object_of_interest=" + object_of_interest; 
+    async function fetchImageData(objectOfInterest,timerange) {
+        const DEFAULT_QUERY =  global.config.API + "moreimgs?start=" + timerange.start + 
+        "&cam=" + cam + "&end=" + timerange.end + "&object_of_interest=" + objectOfInterest
 
         fetch(DEFAULT_QUERY)
             .then(response => {
                 // make sure to check for errors
-                return response.json();
+                console.log(" response:" + response)
+                if (response.ok) {
+                    console.log(" response:" + JSON.stringify(response, null, 2) )
+                    return response.json();
+                } else {
+                    console.log(" error:")
+                    throw new Error('Something went wrong ...');
+                }
             })
             .then(json => { 
                 setData(json)
@@ -37,9 +43,9 @@ const ObjectOfInterest = (props) => {
 
 
     useEffect(() => { 
-        fetchImageData();
+        fetchImageData(props.object_of_interest, props.timerange);
         },
-        [props.cam, props.object_of_interest]);
+        [props.cam, props.object_of_interest, props.timerange]);
      
     
         

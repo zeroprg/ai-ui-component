@@ -18,7 +18,7 @@ class VideoStreamers extends Component {
 
 
     componentWillMount() {
-        this.object_of_interest = ['car','person','cat', 'dog', 'track', 'motobike'];
+        this.object_of_interest = ['car','person','cat', 'dog', 'truck','bus', 'train', 'motobike'];
 
             // initial state
         this.setState({
