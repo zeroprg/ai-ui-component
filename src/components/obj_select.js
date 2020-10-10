@@ -48,7 +48,7 @@ function getStyles(name, objectName, theme) {
   const SelectObj = (props) => {
     const classes = useStyles();
     const theme = useTheme();
-    const [objectName, setObjectName] = React.useState([]);
+    const [objectName, setObjectName] = React.useState(props.selected_object_of_interest);
     
 
     const handleChange = (event) => {

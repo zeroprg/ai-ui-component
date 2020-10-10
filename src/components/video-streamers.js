@@ -26,7 +26,7 @@ class VideoStreamers extends Component {
             //object_of_interest: ['car','person','cat', 'dog', 'track', 'motobike']
 
         })
-        this.timerange = {start: 0, end: 46456};
+        this.timerange = {start: 0, end: 12};
     }
 
     componentDidMount() {

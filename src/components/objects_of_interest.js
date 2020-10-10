@@ -116,7 +116,7 @@ const ObjectOfInterest = (props) => {
 
         <div id={'Objectsfilter'+ props.cam } className="tabcontent" style={{display:'block'}}>
           <div id={'cam'+ props.cam} className="images_row">
-           {renderableItems().map(data =>
+           {data.map(data =>
             <img key={data.hashcode} id={data.hashcode} className={'img_thumb'} src={data.frame}  alt={data.currentime} onClick={popup_image.bind(this)} />
            )} 
         </div> 
