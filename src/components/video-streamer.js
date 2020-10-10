@@ -12,7 +12,7 @@ class VideoStreamer extends Component {
         // initial state
     this.setState({
         isLoading : false,
-        timerange: {start: 0, end: 12},
+        timerange: {start: 0, end: 2},
         object_of_interest: this.props.object_of_interest
         })
     }
