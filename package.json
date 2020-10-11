@@ -25,7 +25,6 @@
     "react-scripts": "3.4.3",
     "react-vis": "^1.11.7",
     "simplify-js": "^1.2.4",
-    "victory-native": "30.0.0"
     
   },
   "scripts": {
