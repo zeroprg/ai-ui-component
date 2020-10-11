@@ -24,7 +24,7 @@
     "react-plotter": "^0.1.2",
     "react-scripts": "3.4.3",
     "react-vis": "^1.11.7",
-    "simplify-js": "^1.2.4",
+    "simplify-js": "^1.2.4"
     
   },
   "scripts": {
