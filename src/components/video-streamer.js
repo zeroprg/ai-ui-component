@@ -12,7 +12,7 @@ class VideoStreamer extends Component {
         // initial state
     this.setState({
         isLoading : false,
-        timerange: {start: 0, end: 24},
+        timerange: {start: 0, end: 1},
         object_of_interest: this.props.object_of_interest
         })
     }
@@ -35,7 +35,7 @@ class VideoStreamer extends Component {
 */
         
         return (            
-                <section  key={'section'+camera.cam} style={{display: 'block'}}>
+                <section id={'section'+camera.cam} key={'section'+camera.cam} style={{display: 'block'}}>
                     <div className="row">
                         <div className="col-sm-12">
                           <ObjectOfInterestPlot cam={camera.cam}

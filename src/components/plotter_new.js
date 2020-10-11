@@ -8,7 +8,7 @@ class Plotter extends Component {
     };
 
     recalculateParameters(){
-        const timestamp = new Date().getTime();
+        const timestamp = Math.floor(new Date().getTime());
         const ONE_HOUR = 3600000;
         const start = timestamp - this.props.timerange.end*ONE_HOUR
         const end   = timestamp - this.props.timerange.start*ONE_HOUR

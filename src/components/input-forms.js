@@ -24,14 +24,14 @@ class InputURL extends Component {
       }
 
       handleSubmit(event) {
-        alert('A form was submitted: ' + this.state.value);                
+        this.saveURLForm()           
         this.setState({ isLoading: true });
         event.preventDefault();
       }
     
       saveURLForm() {          
         const API = ""
-        const DEFAULT_QUERY ="urls?submit=true"
+        const DEFAULT_QUERY = global.config.API + "urls?add="+this.state.url + "&email="+this.state.email
         console.log(" start:")
         fetch(API + DEFAULT_QUERY)
             .then(response => {
@@ -44,20 +44,13 @@ class InputURL extends Component {
                     throw new Error('Something went wrong ...');
                 }
             })
-            .then(this.props.addURL(this.state.url))
+            .then(
+                 this.props.addURL(this.state.url)
+                 )
             .catch(error => this.setState({ error, isLoading: false }));
         } 
 
     render() {
-        const { isLoading, error } = this.state;
-    
-        if (error) {
-            return <p>{error.message}</p>;
-        }
-    
-        if (isLoading) {
-            return <p>Loading ...</p>;
-        }
     
         return (
             <div>

@@ -3,7 +3,8 @@ import TimeRange from './time_range'
 import { makeStyles } from '@material-ui/core/styles';
 //import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
 import SelectObj from './obj_select';
-import Plotter from './ploter';
+import Plotter from './plotter';
+
 
  const ObjectOfInterestPlot = (props) => {
 
@@ -50,7 +51,8 @@ import Plotter from './ploter';
          // .catch(error => this.setState({ error, isLoading: false }));
     }
     function fetchAll(){
-      selected_obj_of_interest.map(key => { if(key) fetchStatisticData(key) });
+      if(selected_obj_of_interest) 
+          selected_obj_of_interest.map(key => { if(key) fetchStatisticData(key) });
     }
 
 

@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 
-function addURL(url){
-    this.setState(url);
-  }
-
 class URLlist extends Component {
 
 buttonClickHide(arg1, arg2) {
-    document.getElementById("section"+arg2).style.display ='none';
+    let elem = document.getElementById("section"+arg2)
+    if(elem) elem.style.display ='none';
 }
  constructor(){
      super();
      this.state = {data : []};
  }
 
- updateurls( urls ) {
-    this.props.updateurls(urls);
+ updateparams(param) {
+    this.props.updateparams(param);
+  }
+
+ updateurls( data ) {
+    this.setState( data )    
+    this.props.updateurls(data);
  }
 /*
 moreparams(camera , value){
@@ -34,12 +36,13 @@ moreparams(camera , value){
 */
 
 buttonClickShow(data, cam) {
-    console.log("cam:" + cam); 
-    console.log("data:" + data);
+    this.updateparams({ videoalignment: 'both' });
     let elem = document.getElementById("section"+cam);
-    elem.style.display ='block'
-    this.moreparams(cam, "0-1");
-    elem.scrollIntoView();
+    
+    if (elem ) {
+        elem.scrollIntoView();
+    }    
+
 }
 
 loadData() {  
@@ -76,24 +79,32 @@ componentWillMount() {
        // error: {message: 'URL is empty' }
     })
 }    
+
+
+                    <a  onClick={() =>  this.buttonClickHide(this.state.url+data[1] , data[0])} className="btn btn-primary a-btn - slide - text">
+                        <span className="glyphicon" aria-hidden="true"></span>
+                        <span>
+                            <strong>Hide</strong>
+                        </span>
+                    </a>
+
 */
 componentDidMount() {
     // initial state
     this.loadData()
 }    
 
+componentWillReceiveProps(nextProps) {
+    if(nextProps.url) {
+        this.loadData()
+    }
+}    
+
 
 render() {
-    const { data, isLoading, error } = this.state;
+    const { data } = this.state;
 
-    if (error) {
-        return <p>{error.message}</p>;
-    }
-
-    if (isLoading) {
-        return <p>Loading ...</p>;
-    }
-
+    if(data && data.length>0)    
     return (
         <ul>
             {data.map(data =>
@@ -106,16 +117,13 @@ render() {
                             <strong>Show</strong>
                         </span>
                     </a>
-                    <a  onClick={() =>  this.buttonClickHide(this.state.url+data[1] , data[0])} className="btn btn-primary a-btn - slide - text">
-                        <span className="glyphicon" aria-hidden="true"></span>
-                        <span>
-                            <strong>Hide</strong>
-                        </span>
-                    </a>
                 </li>
             )}
         </ul>
     );
+    else {
+        return <p>Loading ...</p>
+    }
   }
 }
 export default URLlist
