@@ -1101,3 +1101,13 @@ a.btn {
         flex: 0 0 100% !important;
     }
 }
+
+.brush .extent {
+    stroke: #000;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+  }
+  
+  .brush .background {
+    fill: #ddd;
+  }

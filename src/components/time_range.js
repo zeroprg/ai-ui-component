@@ -13,13 +13,13 @@ function valuetext(value) {
   return value + ' hours';
 }
 
-const RangeSlider = ({onParamsChanged, timerange}) => {
+const RangeSlider = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState([timerange.start, timerange.end]);
+  const [value, setValue] = React.useState([props.timerange.start, props.timerange.end]);
 
   const handleChange = (event, newValue) => {
     const timerange = {start: newValue[0], end: newValue[1]} 
-    onParamsChanged(timerange);
+    props.onParamsChanged(timerange);
     setValue(newValue);
   };
 

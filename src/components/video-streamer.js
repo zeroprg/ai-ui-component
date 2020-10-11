@@ -12,14 +12,17 @@ class VideoStreamer extends Component {
         // initial state
     this.setState({
         isLoading : false,
-        timerange: {start: 0, end: 2},
+        timerange: {start: 0, end: 24},
         object_of_interest: this.props.object_of_interest
         })
     }
 
-    onParamsChanged = (timerange, object_of_interest)=>{
-        if(timerange)          this.setState( {timerange: timerange} );
-        if(object_of_interest) this.setState( {object_of_interest: object_of_interest});
+    onTimeChanged = (timerange)=>{
+            this.setState( {timerange: timerange} );
+    }
+
+    onParamsChanged = (object_of_interest)=>{
+            this.setState( {object_of_interest: object_of_interest});
     }
 
     render() {
@@ -38,6 +41,7 @@ class VideoStreamer extends Component {
                           <ObjectOfInterestPlot cam={camera.cam}
                                                 timerange={this.state.timerange} 
                                                 onParamsChanged={this.onParamsChanged.bind(this)}
+                                                onTimeChanged={this.onTimeChanged.bind(this)}
                                                 object_of_interest={this.props.object_of_interest}/>
                         </div> 
                     </div> {/* className row */}

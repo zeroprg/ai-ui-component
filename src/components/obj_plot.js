@@ -3,7 +3,7 @@ import TimeRange from './time_range'
 import { makeStyles } from '@material-ui/core/styles';
 //import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeries} from 'react-vis';
 import SelectObj from './obj_select';
-import Ploter from './ploter';
+import Plotter from './ploter';
 
  const ObjectOfInterestPlot = (props) => {
 
@@ -39,10 +39,12 @@ import Ploter from './ploter';
               }              
           })
           .then(val => { 
-              data[objectOfInterest] = val
-              data[objectOfInterest].color = color
-              setColor(color + 100)
-              setData(data) 
+              if( val && val.length>0) {
+                setColor(color + 100)              
+                data['label'] = objectOfInterest;
+                data['values'] = val;
+                setData(data); 
+              }
               return data;              
           });
          // .catch(error => this.setState({ error, isLoading: false }));
@@ -68,16 +70,21 @@ import Ploter from './ploter';
 
       
 
-    function onParamsChanged(timerange, object_of_interest ){
+    function onTimeChanged(timerange){
+      setTimerange(timerange);
+      props.onTimeChanged(timerange);
+    }
+
+    
+    function onParamsChanged(object_of_interest ){
       setObjectOfInterest(object_of_interest);
-      if(timerange !== undefined) setTimerange(timerange);
       props.onParamsChanged(timerange, object_of_interest);
     }
     return (
     <div className={classes.root}>
-      <TimeRange onParamsChanged={props.onParamsChanged} timerange={props.timerange}/>
+      <TimeRange onParamsChanged={onTimeChanged} timerange={props.timerange}/>
       <SelectObj onParamsChanged={onParamsChanged} object_of_interest={props.object_of_interest} selected_object_of_interest={[props.object_of_interest[0]]}/>
-      <Ploter data={data} timerange = {timerange} />
+      <Plotter id="plotter" key={timerange} data={data} timerange = {timerange} /> 
     </div>
     );
   }

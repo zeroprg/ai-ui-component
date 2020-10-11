@@ -6,6 +6,59 @@ export const fakeObjectOfInterest = [
 const timestamp = new Date('May 23 2017').getTime();
 const ONE_DAY = 864000;
 
+const DATA_SCATTER = [{label:'car',
+    values: [
+        {x: new Date(2015, 2, 5), y: 1},
+        {x: new Date(2015, 2, 6), y: 2},
+        {x: new Date(2015, 2, 7), y: 0},
+        {x: new Date(2015, 2, 8), y: 3},
+        {x: new Date(2015, 2, 9), y: 2},
+        {x: new Date(2015, 2, 10), y: 3},
+        {x: new Date(2015, 2, 11), y: 4},
+        {x: new Date(2015, 2, 12), y: 4},
+        {x: new Date(2015, 2, 13), y: 1},
+        {x: new Date(2015, 2, 14), y: 5},
+        {x: new Date(2015, 2, 15), y: 0},
+        {x: new Date(2015, 2, 16), y: 1},
+        {x: new Date(2015, 2, 16), y: 1},
+        {x: new Date(2015, 2, 18), y: 4},
+        {x: new Date(2015, 2, 19), y: 4},
+        {x: new Date(2015, 2, 20), y: 5},
+        {x: new Date(2015, 2, 21), y: 5},
+        {x: new Date(2015, 2, 22), y: 5},
+        {x: new Date(2015, 2, 23), y: 1},
+        {x: new Date(2015, 2, 24), y: 0},
+        {x: new Date(2015, 2, 25), y: 1},
+        {x: new Date(2015, 2, 26), y: 1}
+    ] },
+    {label:'person',
+    values: [
+        {x: new Date(2015, 2, 5), y: 1},
+        {x: new Date(2015, 2, 6), y: 2},
+        {x: new Date(2015, 2, 7), y: 0},
+        {x: new Date(2015, 2, 8), y: 3},
+        {x: new Date(2015, 2, 9), y: 2},
+        {x: new Date(2015, 2, 10), y: 3},
+        {x: new Date(2015, 2, 11), y: 4},
+        {x: new Date(2015, 2, 12), y: 4},
+        {x: new Date(2015, 2, 13), y: 1},
+        {x: new Date(2015, 2, 14), y: 5},
+        {x: new Date(2015, 2, 15), y: 0},
+        {x: new Date(2015, 2, 16), y: 1},
+        {x: new Date(2015, 2, 16), y: 1},
+        {x: new Date(2015, 2, 18), y: 4},
+        {x: new Date(2015, 2, 19), y: 4},
+        {x: new Date(2015, 2, 20), y: 5},
+        {x: new Date(2015, 2, 21), y: 5},
+        {x: new Date(2015, 2, 22), y: 5},
+        {x: new Date(2015, 2, 23), y: 1},
+        {x: new Date(2015, 2, 24), y: 0},
+        {x: new Date(2015, 2, 25), y: 1},
+        {x: new Date(2015, 2, 26), y: 1}
+    ]
+    }
+    ]
+
 const DATA1 = [
     {x0: ONE_DAY * 2, x: ONE_DAY * 3, y: 1},
     {x0: ONE_DAY * 7, x: ONE_DAY * 8, y: 1},
