@@ -23,9 +23,9 @@
     "react-dom": "^16.13.1",
     "react-plotter": "^0.1.2",
     "react-scripts": "3.4.3",
+    "react-toastify": "^6.0.9",
     "react-vis": "^1.11.7",
     "simplify-js": "^1.2.4"
-    
   },
   "scripts": {
     "start": "react-scripts start",

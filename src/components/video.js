@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const Video = (props) => {
+    const HOST = global.config.API
     const useStyles = makeStyles({
         root: {
             '-webkit-user-select': 'none',
@@ -21,7 +22,7 @@ const Video = (props) => {
             <b> {camera.url}: <button id={'drwZone'+ camera.cam} onClick = {'refresh(' + camera.cam +')'}>Show zones</button>
             </b>
             <br/> 
-            <img id={'stream'+camera.cam}  className={classes.root} src={camera.url} alt="Video Streamer"/>
+            <img id={'stream'+camera.cam}  className={classes.root} src={HOST+"video_feed?cam="+camera.cam} alt="Video Streamer"/>
             <div id={'canvas_div'+ camera.cam} style={{float:'left', marginLeft: '20px', display:'none'}} >
                     <canvas id={'jPolygon'+ camera.cam} width="500" height="400" style={{cursor: 'crosshair'}} data-imgsrc={camera.url} onMouseDown="point_it(event,{{cam}})" onContextMenu="return false;">
                         Your browser does not support the HTML5 canvas tag.

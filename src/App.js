@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+  
 
 
 import URLlist from './components/urls'
 import InputURL from './components/input-forms'
 import VideoStreamers from './components/video-streamers'
-//import Carousel from 'react-bootstrap/Carousel'
+
+const notify = () => toast("This URL already exist !");
+
 
 
 class App extends Component {

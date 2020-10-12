@@ -34,23 +34,13 @@ class InputURL extends Component {
         const DEFAULT_QUERY = global.config.API + "urls?add="+this.state.url + "&email="+this.state.email
         console.log(" start:")
         fetch(DEFAULT_QUERY)
-            .then(response => {
-                console.log(" response:" + response)
-                if (response.ok) {
-                    this.setState({ isLoading: false, url: '' });
-                    return response.json();
-
-                } else {
-                    console.log(" error:")
-                    this.setState({ isLoading: false, url: 'Wrong url, no video on this IP' });
-                    throw new Error('Something went wrong ...');
-                }
-            })
             .then(() => {
                     this.props.addURL(this.state.url)
                     this.setState({ isLoading: false, url: '' });
                  })
-            .catch(error => this.setState({ error, isLoading: false, url: 'Wrong url, no video on this IP' }));
+            .catch(error => {
+                this.setState({ error, isLoading: false, url: 'Wrong url, no video on this IP' })
+                });
         } 
 
     render() {
