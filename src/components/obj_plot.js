@@ -49,8 +49,8 @@ import Plotter from './plotter';
               return data;              
           });
          // .catch(error => this.setState({ error, isLoading: false }));
-    }
-    function fetchAll(){
+    }f
+    unction fetchAll(){
       if(selected_obj_of_interest) 
           selected_obj_of_interest.map(key => { if(key) fetchStatisticData(key) });
     }
@@ -58,7 +58,7 @@ import Plotter from './plotter';
 
 
     useEffect(() => {
-      const interval = setInterval(() => setTime(new Date().getTime()), 1000);
+      const interval = setInterval(() => setTime(new Date().getTime()), 600000);
       return () => {
         clearInterval(interval);
       };
