@@ -30,10 +30,10 @@ class InputURL extends Component {
       }
     
       saveURLForm() {          
-        const API = ""
+        this.setState({ isLoading: true});
         const DEFAULT_QUERY = global.config.API + "urls?add="+this.state.url + "&email="+this.state.email
         console.log(" start:")
-        fetch(API + DEFAULT_QUERY)
+        fetch(DEFAULT_QUERY)
             .then(response => {
                 console.log(" response:" + response)
                 if (response.ok) {
@@ -46,16 +46,17 @@ class InputURL extends Component {
                     throw new Error('Something went wrong ...');
                 }
             })
-            .then(
-                 this.props.addURL(this.state.url)
-                 )
+            .then(() => {
+                    this.props.addURL(this.state.url)
+                    this.setState({ isLoading: false, url: '' });
+                 })
             .catch(error => this.setState({ error, isLoading: false, url: 'Wrong url, no video on this IP' }));
         } 
 
     render() {
-    
         return (
             <div>
+                {this.state.isLoading? <p className="loading"> ... Loading </p>:''} 
                 <h3>Enter IP Camera url at this box </h3>
                 <h3><b>Warning:</b> "By specifying IP Address or camera URL bellow you will share your link with all other subscribers. To make this link private your have to subscribe to payable version"</h3>
                     <form id="myform" className="form-horizontal" onSubmit={this.handleSubmit}>
@@ -85,7 +86,7 @@ class InputURL extends Component {
                                     <FormControlLabel disabled value="objects" control={<Radio />} label="Show captured objects only" />
                                 </RadioGroup>
                            </FormControl>
-    
+                           
                     </form>
                 </div>
                     )

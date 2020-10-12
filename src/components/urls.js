@@ -56,6 +56,7 @@ loadData() {
             console.log(" response:" + response)
             if (response.ok) {
                 //console.log(" response:" + JSON.stringify(response, null, 2) )
+                this.setState({isLoading: false })
                 return response.json();
             } else {
                 console.log(" error:")
@@ -96,7 +97,10 @@ componentDidMount() {
 
 componentWillReceiveProps(nextProps) {
     if(nextProps.url && nextProps.url !== this.state.url && !nextProps.url.includes("Wrong URL")) {
-        this.setState({url: nextProps.url})
+        for(let val in this.state.data ){
+            if(nextProps.url.includes(val[0]) ) return;
+        }    
+
         this.loadData()
     }
 }    
@@ -123,7 +127,7 @@ render() {
         </ul>
     );
     else {
-        return <p>Loading ...</p>
+        return <p className= "loading"> ...  Loading ...</p>
     }
   }
 }
