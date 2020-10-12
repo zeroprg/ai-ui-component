@@ -35,7 +35,7 @@ moreparams(camera , value){
  }  
 */
 
-buttonClickShow(data, cam) {
+buttonClickShow(cam) {
     this.updateparams({ videoalignment: 'both' });
     let elem = document.getElementById("section"+cam);
     
@@ -63,7 +63,7 @@ loadData() {
             }
         })
         .then(data => {
-             this.setState({ data: data, url: deleteURL, isLoading: false })
+             this.setState({ data: data, isLoading: false })
              this.updateurls(data);
              return data;
             })
@@ -95,7 +95,8 @@ componentDidMount() {
 }    
 
 componentWillReceiveProps(nextProps) {
-    if(nextProps.url) {
+    if(nextProps.url && nextProps.url !== this.state.url && !nextProps.url.includes("Wrong URL")) {
+        this.setState({url: nextProps.url})
         this.loadData()
     }
 }    
@@ -111,7 +112,7 @@ render() {
                 <li key={data[0]}>
                     <a href={data[1]}>{data[1]}</a>
                     &nbsp;
-                    <a onClick={() => this.buttonClickShow(this.state.url+data[1] , data[0])} className="btn btn-primary a-btn - slide - text">
+                    <a onClick={() => this.buttonClickShow( data[0] )} className="btn btn-primary a-btn - slide - text">
                         <span className="glyphicon" aria-hidden="true"></span>
                         <span>
                             <strong>Show</strong>

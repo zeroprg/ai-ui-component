@@ -37,17 +37,19 @@ class InputURL extends Component {
             .then(response => {
                 console.log(" response:" + response)
                 if (response.ok) {
-                    //console.log(" response:" + JSON.stringify(response, null, 2) )
+                    this.setState({ isLoading: false, url: '' });
                     return response.json();
+
                 } else {
                     console.log(" error:")
+                    this.setState({ isLoading: false, url: 'Wrong url, no video on this IP' });
                     throw new Error('Something went wrong ...');
                 }
             })
             .then(
                  this.props.addURL(this.state.url)
                  )
-            .catch(error => this.setState({ error, isLoading: false }));
+            .catch(error => this.setState({ error, isLoading: false, url: 'Wrong url, no video on this IP' }));
         } 
 
     render() {
