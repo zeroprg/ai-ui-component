@@ -49,8 +49,8 @@ import Plotter from './plotter';
               return data;              
           });
          // .catch(error => this.setState({ error, isLoading: false }));
-    }f
-    unction fetchAll(){
+    }
+    function fetchAll(){
       if(selected_obj_of_interest) 
           selected_obj_of_interest.map(key => { if(key) fetchStatisticData(key) });
     }
