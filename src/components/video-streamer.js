@@ -7,6 +7,8 @@ import ObjectOfInterest from './objects_of_interest'
 import Video from './video';
 
 class VideoStreamer extends Component {
+    
+    
 
     componentWillMount() {
         // initial state
@@ -48,7 +50,7 @@ class VideoStreamer extends Component {
 
                 <div className="row">
                 <div className="col-sm-6">
-                    <Video camera = {camera}/> 
+                    <Video key={camera.cam} camera = {camera} showBoxes={false}/> 
                 </div>  
                 <div className="col-sm-6">                           
                     <Tabs  defaultActiveKey="founded_objects" id="uncontrolled-tab">

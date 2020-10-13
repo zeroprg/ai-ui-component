@@ -1,41 +1,47 @@
-import React ,{useState, createRef} from 'react';
+import React ,{ useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+//import { useMediaQuery } from 'react-responsive';
 
 
 
-
-const Video = (props) => {
+const Video = ({camera, showBoxesAroundObjects}) => {
     const HOST = global.config.API
-    const [showBoxes, setShowBoxes] = useState(false) ;
-    const checkBoxInput = createRef();
+    //let checkBoxElem = useRef(null)    
+    const [showBoxes, setShowBoxes] = useState(showBoxesAroundObjects);
+    //const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
     const useStyles = makeStyles({
         root: {
             '-webkit-user-select': 'none',
              display: 'block',
              width: '100%',
-             'min-width': '700px',
+             'min-width':'700px',
              height: 'auto',             
              'padding-bottom': '20px',
         },
       });
       const classes = useStyles(); 
-      const{camera} = props;        
+
 
 // <b> {camera.url}: <button id={'drwZone'+ camera.cam} onClick = {this.showframes? 'refresh(' + camera.cam +')'}>Show zones</button>             <b> {camera.url}: <button id={'drwZone'+ camera.cam} onClick = {this.showframes? 'refresh(' + camera.cam +')'}>Show zones</button></b>         <br/> 
 
     const changeCheckBoxInput = () => {
-            setShowBoxes(!showBoxes);
+            setShowBoxes(!showBoxes)
         }
+
+
+    useEffect(() => {
+        setShowBoxes(showBoxes);
+        }, [showBoxes]);
 
     return(<span>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultChecked2" 
-                       ref={checkBoxInput} 
-                       onChange={changeCheckBoxInput} 
-                       {...showBoxes?'checked':''}/>
-                <label class="custom-control-label" for="defaultChecked2">Show catched objects on screen</label>
+                <input type="checkbox" class="custom-control-input" id={"checked"+ camera.cam} 
+                       onChange={changeCheckBoxInput}/> 
+                <label class="custom-control-label" for={"checked"+ camera.cam}> Show catched objects on screen (degradade perfomance)</label>
             </div>
-            <img id={'stream'+camera.cam}  className={classes.root} src={showBoxes? HOST+"video_feed?cam="+camera.cam : camera.url } alt="Video Streamer"/>
+            <img id={'stream'+camera.cam}  className={classes.root}
+                 src={ showBoxes ? HOST+"video_feed?cam="+camera.cam : camera.url } 
+                 alt="Video Streamer"/>
             <div id={'canvas_div'+ camera.cam} style={{float:'left', marginLeft: '20px', display:'none'}} >
                     <canvas id={'jPolygon'+ camera.cam} width="500" height="400" style={{cursor: 'crosshair'}} data-imgsrc={camera.url} onMouseDown="point_it(event,{{cam}})" onContextMenu="return false;">
                         Your browser does not support the HTML5 canvas tag.

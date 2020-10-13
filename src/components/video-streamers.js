@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import Video from './video';
 import VideoStreamer from './video-streamer';
+import Media from 'react-media';
 
 class VideoStreamers extends Component {
     // shared between childs functions
@@ -11,7 +12,7 @@ class VideoStreamers extends Component {
 
 
     constructor(props) {
-        super();
+        super(props);
         this.state = {value: ''};        
         this.url = props.url;
       }
@@ -66,15 +67,32 @@ render() {
     }
 
     if (isLoading) {
-        return <p>Loading ...</p>;
+        return <p>Loading ...</p>;  
     }
     if (isOnlyVideos){
     return (
         <div className="row">
             {urls.map( url => 
-            <div key={'cam'+url.cam} className="col-sm-4">
-                <Video camera = {url} />
-            </div> 
+            <Media queries={{
+                small: "(max-width: 599px)",
+                medium: "(min-width: 600px) and (max-width: 1199px)",
+                large: "(min-width: 1200px)"
+                }}>
+             {matches => (
+                 <Fragment>
+                    {matches.small && 
+                        <div key={'cam'+url.cam} className="col-sm-12"><Video camera = {url} /></div> 
+                    }
+                    {matches.medium && 
+                        <div key={'cam'+url.cam} className="col-sm-6"><Video camera = {url} /></div> 
+                    }
+                    {matches.large && 
+                        <div key={'cam'+url.cam} className="col-sm-4"><Video camera = {url} /></div> 
+                    }
+
+                 </Fragment>
+             )}
+            </Media>    
             )}
         </div>
         )
