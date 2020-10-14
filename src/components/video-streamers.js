@@ -75,8 +75,8 @@ render() {
             {urls.map( url => 
             <Media queries={{
                 small: "(max-width: 599px)",
-                medium: "(min-width: 600px) and (max-width: 1199px)",
-                large: "(min-width: 1200px)"
+                medium: "(min-width: 600px) and (max-width: 1366px)",
+                large: "(min-width: 1367px)"
                 }}>
              {matches => (
                  <Fragment>
