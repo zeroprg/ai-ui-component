@@ -14,7 +14,7 @@ const Video = ({camera, showBoxesAroundObjects}) => {
             '-webkit-user-select': 'none',
              display: 'block',
              width: '100%',
-             'min-width':'700px',
+             'min-width':'599px',
              height: 'auto',             
              'padding-bottom': '20px',
         },
