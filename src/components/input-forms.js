@@ -24,8 +24,7 @@ class InputURL extends Component {
       }
 
       handleSubmit(event) {
-        this.saveURLForm()           
-        this.setState({ isLoading: true });
+        this.props.addURL(this.state.url)         
         event.preventDefault();
       }
     
@@ -35,7 +34,6 @@ class InputURL extends Component {
         console.log(" start:")
         fetch(DEFAULT_QUERY)
             .then(() => {
-                    this.props.addURL(this.state.url)
                     this.setState({ isLoading: false, url: '' });
                  })
             .catch(error => {
@@ -57,13 +55,15 @@ class InputURL extends Component {
                                            value={this.state.url} onChange={this.handleInputChange}/>
                                 </div>
                             </div>
-                            <div className="form-group">
+                  {/*          <div className="form-group">
                                 <label className="control-label col-sm-2" htmlFor="email">Email:</label>
                                 <div className="col-sm-10">
                                     <input type="email" className="form-control" id="email" placeholder="someone@example.com" name="email"
                                             value={this.state.email} onChange={this.handleInputChange}/>
                                 </div>
-                            </div>
+                              </div>  
+             */}             
+                            
                             <div className="form-group">
                                 <div className="col-sm-offset-2 col-sm-10">
                                     <input type="submit" value="submit" className="btn btn-default"/>

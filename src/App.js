@@ -16,7 +16,15 @@ class App extends Component {
   state = { urls: [], param: {videoalignment: 'video'} }
 
   addNewURL(url){
-    this.setState({url:url})
+  
+    if(this.state.urls){
+        for (const val of this.state.urls)
+            if(val.url === url) {
+                return
+            }
+        this.child.saveURLForm();
+        this.setState({url:url})
+    }    
   }
 
   updateurls(urls){
@@ -50,6 +58,7 @@ class App extends Component {
                                   updateurls={this.updateurls.bind(this)}
                                   url={this.state.url}/>
                         <InputURL updateparams={this.updateparams.bind(this)}
+                                  ref={(cd) => this.child = cd}
                                   addURL={this.addNewURL.bind(this)}/>          
                      </div>
                 </div>
