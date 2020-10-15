@@ -44,9 +44,9 @@ import Plotter from './plotter';
                 setColor(color + 100)              
                 //data['label'] = objectOfInterest;
                 //data['values'] = val;
-                setData(data); 
+                setData(val); 
               }
-              return data;              
+              return val;              
           });
          // .catch(error => this.setState({ error, isLoading: false }));
     }
