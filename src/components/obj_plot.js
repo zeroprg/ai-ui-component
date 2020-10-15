@@ -28,27 +28,17 @@ import Plotter from './plotter';
     async function fetchStatisticData(objectOfInterest) {
       
       fetch(DEFAULT_QUERY + objectOfInterest)
-          .then(response => {
-              // make sure to check for errors
-              console.log(" response:" + response)
-              if (response.ok) {
-                  console.log(" response:" + JSON.stringify(response, null, 2) )
-                  return response.json();
-              } else {
-                  console.log(" error:")
-                  throw new Error('Something went wrong ...');
-              }              
-          })
           .then(val => { 
               if( val && val.length>0) {
                 setColor(color + 100)              
                 //data['label'] = objectOfInterest;
                 //data['values'] = val;
+                
                 setData(val); 
               }
               return val;              
-          });
-         // .catch(error => this.setState({ error, isLoading: false }));
+          })
+          .catch(error => this.setState({ error}));
     }
     function fetchAll(){
       if(selected_obj_of_interest) 
