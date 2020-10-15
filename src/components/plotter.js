@@ -1,3 +1,4 @@
+import { map } from 'd3';
 import React, { Component } from 'react';
 import { XYPlot, XAxis, YAxis, VerticalGridLines,  HorizontalGridLines,  VerticalBarSeries, DiscreteColorLegend, VerticalRectSeries} from 'react-vis';
 
@@ -19,7 +20,7 @@ class Plotter extends Component {
                 <DiscreteColorLegend
                     style={{position: 'absolute', left: '10px', top: '10px'}}
                     orientation="horizontal"
-                    items={[this.props.data.label]}
+                    items=  {map.data(data => data.label)}
                 />
 
             <HorizontalGridLines />
@@ -27,9 +28,9 @@ class Plotter extends Component {
             <XAxis title="time" />
             <YAxis title="Frequency" />
             
-            
+            { map.data( data =>
                 <VerticalRectSeries key = {this.props.data.label}  data = {this.props.data.values} />
-        
+            )}
             </XYPlot>
         
             );

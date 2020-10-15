@@ -42,8 +42,8 @@ import Plotter from './plotter';
           .then(val => { 
               if( val && val.length>0) {
                 setColor(color + 100)              
-                data['label'] = objectOfInterest;
-                data['values'] = val;
+                //data['label'] = objectOfInterest;
+                //data['values'] = val;
                 setData(data); 
               }
               return data;              
