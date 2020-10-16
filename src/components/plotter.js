@@ -11,7 +11,7 @@ class Plotter extends Component {
         //  xDomain={[ time - this.props.timerange.end*ONE_HOUR, time - this.props.timerange.start*ONE_HOUR ]}
 
         const ONE_HOUR = 3600000;
-        if( this.props && Object.keys(this.props.data).length > 0 && this.props.data.values.length>0)
+        if( this.props && this.props.data.length>0)
         return (
 
             <XYPlot xType="time" width={1500}  height={300}
@@ -20,7 +20,7 @@ class Plotter extends Component {
                 <DiscreteColorLegend
                     style={{position: 'absolute', left: '10px', top: '10px'}}
                     orientation="horizontal"
-                    items=  {map.data(data => data.label)}
+                    items=  {this.props.data.map(data => data.label)}
                 />
 
             <HorizontalGridLines />
@@ -28,8 +28,8 @@ class Plotter extends Component {
             <XAxis title="time" />
             <YAxis title="Frequency" />
             
-            { map.data( data =>
-                <VerticalRectSeries key = {this.props.data.label}  data = {this.props.data.values} />
+            { this.props.data.map( data =>
+                <VerticalRectSeries key = {data.label}  data = {data.values} />
             )}
             </XYPlot>
         

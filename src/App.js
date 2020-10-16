@@ -23,7 +23,8 @@ class App extends Component {
                 return
             }
         this.child.saveURLForm();
-        this.setState({url:url})
+        this.setState({url:true})
+        setTimeout(this.setState, 1000,{url:true});
     }    
   }
 

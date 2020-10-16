@@ -96,8 +96,8 @@ componentDidMount() {
 }    
 
 componentWillReceiveProps(nextProps) {
-    if(nextProps.url && nextProps.url !== this.state.url && !nextProps.url.includes("Wrong URL")) {
-        this.setState({url: nextProps.url})
+    if(nextProps.url) {
+
         this.loadData()
     }
 }    
