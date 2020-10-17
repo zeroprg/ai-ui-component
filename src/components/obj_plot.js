@@ -49,7 +49,7 @@ import Plotter from './plotter';
      }
     function fetchAll(){
       if(selected_obj_of_interest) 
-          selected_obj_of_interest.map(key => { if(key) fetchStatisticData(key) });
+          fetchStatisticData(selected_obj_of_interest);
     }
 
 
@@ -77,12 +77,14 @@ import Plotter from './plotter';
     
     function onParamsChanged(object_of_interest ){
       setObjectOfInterest(object_of_interest);
-      props.onParamsChanged(timerange, object_of_interest);
+      props.onParamsChanged(object_of_interest);
     }
     return (
     <div className={classes.root}>
       <TimeRange onParamsChanged={onTimeChanged} timerange={props.timerange}/>
-      <SelectObj onParamsChanged={onParamsChanged} object_of_interest={props.object_of_interest} selected_object_of_interest={[props.object_of_interest[0]]}/>
+      <SelectObj onParamsChanged={onParamsChanged} 
+                 object_of_interest={props.object_of_interest}
+                 selected_object_of_interest={[props.object_of_interest[0]]}/>
       <Plotter id="plotter" key={timerange} data={data} timerange = {timerange} /> 
     </div>
     );
