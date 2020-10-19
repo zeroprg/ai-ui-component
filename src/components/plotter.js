@@ -3,6 +3,19 @@ import React, { Component } from 'react';
 import { XYPlot, XAxis, YAxis, VerticalGridLines,  HorizontalGridLines,  VerticalBarSeries, DiscreteColorLegend, VerticalRectSeries} from 'react-vis';
 
 class Plotter extends Component {
+    componentDidMount() {
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
+    }
+    
+    resize() {
+        this.setState({width: window.innerWidth });
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize.bind(this));
+    }
+
 
     render() {
         const time =  Math.floor(new Date().getTime());; // in mil. sec.
@@ -14,7 +27,7 @@ class Plotter extends Component {
         if( this.props && this.props.data.length>0)
         return (
 
-            <XYPlot xType="time" width={1500}  height={300}
+            <XYPlot xType="time" width={this.state.width}  height={300}
                 xDomain={[ time - this.props.timerange.end*ONE_HOUR, time - this.props.timerange.start*ONE_HOUR ]}
             >
                 <DiscreteColorLegend
