@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   updateparams = (param) => {
-      this.setState(param);
+      this.setState(param); 
   }
 
   loadData() {  
