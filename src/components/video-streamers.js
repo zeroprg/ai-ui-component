@@ -32,7 +32,7 @@ class VideoStreamers extends Component {
 
     componentDidMount() {
         // initial state
-       // this.loadURLs()
+        this.loadURLs()
     }    
 
     loadURLs() {
@@ -59,6 +59,8 @@ render() {
     const {  isLoading, error } = this.state;
     const { param } = this.props;
     const isOnlyVideos = param.videoalignment === 'video';
+    const isStatistic = param.videoalignment === 'statistic';
+    const isVideoAndStatistic = param.videoalignment === 'both';
 
 
 
@@ -69,12 +71,12 @@ render() {
     if (isLoading) {
         return <p>Loading ...</p>;  
     }
-    if (isOnlyVideos){
+    if (isOnlyVideos || isStatistic){
     return (
         <div className="row">
             {urls.map( url => 
             <Media queries={{
-                small: "(max-width: 599px)",
+                small: "(max-width: 500px)",
                 medium: "(min-width: 600px) and (max-width: 1366px)",
                 large: "(min-width: 1367px)"
                 }}>
@@ -97,7 +99,7 @@ render() {
         </div>
         )
 
-    } else {    
+    } else if(isVideoAndStatistic) {    
     return (            
        
         <span>

@@ -37,7 +37,8 @@ const Video = ({camera, showBoxesAroundObjects}) => {
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id={"checked"+ camera.cam} 
                        onChange={changeCheckBoxInput}/> 
-                <label class="custom-control-label" for={"checked"+ camera.cam}> Show catched objects on screen (degradade perfomance)</label>
+                <label class="custom-control-label" for={"checked"+ camera.cam}> Show catched objects for {camera.url}</label>
+               
             </div>
             <img id={'stream'+camera.cam}  className={classes.root}
                  src={ showBoxes ? HOST+"video_feed?cam="+camera.cam : camera.url } 

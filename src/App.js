@@ -13,7 +13,7 @@ const notify = () => toast("This URL already exist !");
 
 
 class App extends Component {
-  state = { urls: [], param: {videoalignment: 'video'} }
+  state = { urls: [], videoalignment: 'video' }
 
   addNewURL(url){
   
@@ -35,10 +35,42 @@ class App extends Component {
   }
 
   updateparams = (param) => {
-      this.setState({param:param});
+      this.setState(param);
   }
 
+  loadData() {  
+    const DEFAULT_QUERY = global.config.API + "urls?list=true"
+    const URL = global.config.API + "urls"
+    const deleteURL = URL + "?delete="
+    this.setState({ isLoading: true });
+   
+    fetch(DEFAULT_QUERY)
+        .then(response => {
+            console.log(" response:" + response)
+            if (response.ok) {
+                //console.log(" response:" + JSON.stringify(response, null, 2) )
+                this.setState({isLoading: false })
+                return response.json();
+            } else {
+                console.log(" error:")
+                throw new Error('Something went wrong ...');
+            }
+        })
+        .then(data => {
+             this.setState({ data: data, isLoading: false })
+             this.updateurls(data);
+             return data;
+            })
+        .catch(error => this.setState({ error, isLoading: false }));
+    }
+
+    componentDidMount() {
+        // initial state
+        this.loadData()
+    }  
+
   render() {
+    const isVideoAndStatistic = this.state.videoalignment === 'statistic';  
     return (  
     <div className="App">
       <header className="App-header">
@@ -55,12 +87,14 @@ class App extends Component {
                         <h1 className="animated fadeInDown">AI processed video streams from public cameras.</h1>
                         <h3> This is free smart cloud storage  for cameras video streams works on ODROID ARM based computers   (100% python , no php  for more information check 
                         <a href="//aicameras.ca" target="_blank" rel="noopener noreferrer"> http://aicameras.ca</a> ), bellow public available video-streams: </h3>
-                        <URLlist  updateparams={this.updateparams.bind(this)} 
-                                  updateurls={this.updateurls.bind(this)}
-                                  url={this.state.url}/>
                         <InputURL updateparams={this.updateparams.bind(this)}
                                   ref={(cd) => this.child = cd}
-                                  addURL={this.addNewURL.bind(this)}/>          
+                                  addURL={this.addNewURL.bind(this)}/> 
+                               
+                        {isVideoAndStatistic && <URLlist updateparams={this.updateparams.bind(this)} 
+                                                         updateurls={this.updateurls.bind(this)}
+                                                         data={this.state.urls}/> }
+                         
                      </div>
                 </div>
             </div>
@@ -68,7 +102,7 @@ class App extends Component {
     </header>
     
 
-       <VideoStreamers param={this.state.param} urls={this.state.urls} />
+       <VideoStreamers param={this.state} urls={this.state.urls} />
 
     
  
